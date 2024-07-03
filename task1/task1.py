@@ -1,4 +1,5 @@
 import numpy
+from itertools import cycle
 import argparse
 
 
@@ -13,17 +14,39 @@ if __name__ == '__main__':
     parser.add_argument('arg_2', type=int)
 
     arguments = parser.parse_args()
-    mass_list = numpy.arange(1, arguments.arg_1 + 1)
 
-    list_way = list()
-    list_way.append(mass_list[0])
+    list_way = [1]
+    cycle_mas = cycle([number for number in range(1, arguments.arg_1 + 1)])
+
+    count = 1
+    next_item = next(cycle_mas)
 
     while True:
-        overturn_list = numpy.roll(mass_list, shift=arguments.arg_1 - arguments.arg_2 + 1)
+        count += 1
+        num = next(cycle_mas)
 
-        list_way.append(overturn_list[0])
-        mass_list = overturn_list
-        if list_way[0] == overturn_list[arguments.arg_2 - 1]:
+        if num == 1 and count % arguments.arg_2 == 0:
             break
 
+        elif count == arguments.arg_2 and num != 1:
+            count = 1
+            list_way.append(num)
+
     print(''.join(list(map(str, list_way))))
+
+
+
+
+
+""""метод numpy.roll и передвигая массив на себя с нужным шагом ,а не иду по нему c помощью cycle
+(numpy быстрее)"""
+
+   #  while True:
+   #     overturn_list = numpy.roll(mass_list, shift=arguments.arg_1 - arguments.arg_2 + 1)
+
+   #     list_way.append(overturn_list[0])
+   #     mass_list = overturn_list
+   #     if list_way[0] == overturn_list[arguments.arg_2 - 1]:
+   #         break
+
+   # print(''.join(list(map(str, list_way))))
