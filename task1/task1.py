@@ -3,8 +3,7 @@ from itertools import cycle
 import argparse
 
 
-""""Использую метод numpy.roll и передвигаю массив на себя с нужным шагом ,а не иду по нему c помощью cycle
-(numpy быстрее)"""
+""""Сделал с помощью  cycle"""
 
 
 if __name__ == '__main__':
